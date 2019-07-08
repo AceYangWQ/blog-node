@@ -1,20 +1,21 @@
-const { 
-    getList, 
-    getDetail,
-    newBlog,
-    updateBlog,
-    deleteBlog } = require('../controller/blog')
+const { getList, getDetail, newBlog, updateBlog, deleteBlog } = require('../controller/blog')
 const { SuccessModel, ErrorModel } = require('../model/resModel')
 
-const handleBlogRouter = (req, res) => {
+const handleBlogRouter = async (req, res) => {
     const id = req.query.id
     
     // 获取博客列表
     if (req.method === 'GET' && req.path === '/api/blog/list') {
         const author = req.query.author || ''
         const keyword = req.query.keyword || ''
-        const listData = getList(author, keyword)
-        return new SuccessModel(listData)
+        // const listData = getList(author, keyword)
+        // return new SuccessModel(listData)
+        // const result = getList(author, keyword)
+        return result.then(listData => {
+            return new SuccessModel(listData)
+        })
+        // const result = await getList(author, keyword)
+        // return new SuccessModel(result)
     }
 
     // 获取博客详情

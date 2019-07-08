@@ -22,5 +22,5 @@ function exec(sql) {
 }
 
 module.exports = {
-    conf
+    exec
 }
