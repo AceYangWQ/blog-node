@@ -1,9 +1,13 @@
-const loginCheck = (username, password) => {
-    // 先使用假数据
-    if (username === 'zhangsan' && password === '123') {
-        return true
+const { exec } = require('../db/mysql')
+
+const loginCheck = async (username, password) => {
+    const sql = `
+        select username, realname from users where username='${username}' and password='${password}'
+    `
+    const rows = await exec(sql)
+    if(rows) {
+        return rows[0] || {}
     }
-    return false
 }
 
 module.exports = {
